@@ -52,13 +52,15 @@ router.get('/tmdb/genres', asyncHandler(async (req, res) => {
 router.get('/tmdb/top-rated', asyncHandler(async (req, res) => {
     const topRatedMovies = await movieModel.find().sort({ vote_average: -1 }).limit(10);
     res.status(200).json(topRatedMovies);
+    
+
 }));router.get('/genre/:genreId', asyncHandler(async (req, res) => {
     const genreId = parseInt(req.params.genreId);
     const movies = await movieModel.find({ genre_ids: genreId });
     if (movies.length > 0) {
         res.status(200).json(movies);
     } else {
-        res.status(404).json({ message: 'No movies found for this genre.', status_code: 404 });
+        res.status(404).json({ message: 'No movies found', status_code: 404 });
     }
 }));
 

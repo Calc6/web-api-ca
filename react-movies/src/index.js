@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import WatchlistPage from "./pages/WatchlistPage";
 import TrendingMoviesPage from "./pages/trendingPage";
 import UpcomingPage from "./pages/UpcomingPage";
+import MoviesByGenrePage from "./pages/MovieByGenrePage";
 
 
 const queryClient = new QueryClient({
@@ -52,6 +53,7 @@ const App = () => {
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route path="/watchlist" element={<WatchlistPage />} />
+            <Route path="/movies/genre/:genreId" element={<MoviesByGenrePage />} />
             <Route path="/movies/trending" element={<TrendingMoviesPage />} />
             <Route path= "/movies/upcoming" element={<UpcomingPage />} />
             <Route path="/" element={<HomePage />} />

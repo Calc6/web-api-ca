@@ -120,6 +120,23 @@ export const getMovie = (args) => {
       });
   };
 
+  export const getMoviesByGenre = (genreId) => {
+    return fetch(
+      `/api/movies/genre/${genreId}`
+    ).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.status_message || "Something went wrong");
+        });
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+  };
+
+
 
 
 

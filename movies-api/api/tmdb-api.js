@@ -16,19 +16,18 @@ export const getUpcomingMovies = async () => {
     }
 };
 
-export const getGenres = async () => {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.TMDB_KEY}&language=en-US`
-        );
+export const getMoviesByGenre = (genreId) => {
+    return fetch(`/api/movies/genre/${genreId}`).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.message || "Something went wrong");
+        });
+      }
+      return response.json();
+    });
+  };
+  
+  
+  
 
-        if (!response.ok) {
-            throw new Error(response.json().message);
-        }
-
-        return await response.json();
-    } catch (error) {
-        throw error;
-    }
-};
 

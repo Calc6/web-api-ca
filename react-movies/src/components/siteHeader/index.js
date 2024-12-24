@@ -1,23 +1,15 @@
-import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
-import MenuIcon from "@mui/icons-material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
-import { useNavigate } from "react-router-dom";
-import { styled } from '@mui/material/styles';
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-
-
-const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem, Button } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useNavigate } from 'react-router-dom';
 
 const SiteHeader = ({ history }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [genreAnchorEl, setGenreAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const genreOpen = Boolean(genreAnchorEl);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -32,12 +24,27 @@ const SiteHeader = ({ history }) => {
     { label: "Upcoming", path: "/movies/upcoming" },
   ];
 
+  const genreOptions = [
+    { label: "Action", path: "/movies/genre/28" }, // Example genre ID for Action
+    { label: "Comedy", path: "/movies/genre/35" }, // Example genre ID for Comedy
+    { label: "Drama", path: "/movies/genre/18" }, // Example genre ID for Drama
+  ];
+
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL, { replace: true });
   };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleGenreMenu = (event) => {
+    setGenreAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setGenreAnchorEl(null);
   };
 
   return (
@@ -65,43 +72,97 @@ const SiteHeader = ({ history }) => {
                   id="menu-appbar"
                   anchorEl={anchorEl}
                   anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                    vertical: 'top',
+                    horizontal: 'right',
                   }}
                   keepMounted
                   transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
+                    vertical: 'top',
+                    horizontal: 'right',
                   }}
                   open={open}
-                  onClose={() => setAnchorEl(null)}
+                  onClose={handleClose}
                 >
-                  {menuOptions.map((opt) => (
-                    <MenuItem
-                      key={opt.label}
-                      onClick={() => handleMenuSelect(opt.path)}
-                    >
-                      {opt.label}
+                  {menuOptions.map((option) => (
+                    <MenuItem key={option.label} onClick={() => handleMenuSelect(option.path)}>
+                      {option.label}
                     </MenuItem>
                   ))}
+                  <MenuItem
+                    aria-controls="genre-menu"
+                    aria-haspopup="true"
+                    onClick={handleGenreMenu}
+                  >
+                    Genre
+                  </MenuItem>
+                  <Menu
+                    id="genre-menu"
+                    anchorEl={genreAnchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={genreOpen}
+                    onClose={handleClose}
+                  >
+                    {genreOptions.map((option) => (
+                      <MenuItem key={option.label} onClick={() => handleMenuSelect(option.path)}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </Menu>
                 </Menu>
               </>
             ) : (
               <>
-                {menuOptions.map((opt) => (
-                  <Button
-                    key={opt.label}
-                    color="inherit"
-                    onClick={() => handleMenuSelect(opt.path)}
+                {menuOptions.map((option) => (
+                  <Typography
+                    key={option.label}
+                    variant="h6"
+                    onClick={() => handleMenuSelect(option.path)}
+                    sx={{ cursor: 'pointer', marginLeft: 2 }}
                   >
-                    {opt.label}
-                  </Button>
+                    {option.label}
+                  </Typography>
                 ))}
+                <Button
+                  aria-controls="genre-menu"
+                  aria-haspopup="true"
+                  onClick={handleGenreMenu}
+                  color="inherit"
+                >
+                  Genre
+                </Button>
+                <Menu
+                  id="genre-menu"
+                  anchorEl={genreAnchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={genreOpen}
+                  onClose={handleClose}
+                >
+                  {genreOptions.map((option) => (
+                    <MenuItem key={option.label} onClick={() => handleMenuSelect(option.path)}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </Menu>
               </>
             )}
         </Toolbar>
       </AppBar>
-      <Offset />
     </>
   );
 };
