@@ -136,6 +136,17 @@ export const getMovie = (args) => {
     });
   };
 
+  export const getTopRatedMovies = () => {
+    return fetch(`/api/movies/tmdb/top-rated`).then((response) => {
+      if (!response.ok) {
+        return response.json().then((error) => {
+          throw new Error(error.message || "Something went wrong");
+        });
+      }
+      return response.json();
+    });
+  };
+
 
 
 

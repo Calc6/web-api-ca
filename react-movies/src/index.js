@@ -15,7 +15,7 @@ import WatchlistPage from "./pages/WatchlistPage";
 import TrendingMoviesPage from "./pages/trendingPage";
 import UpcomingPage from "./pages/UpcomingPage";
 import MoviesByGenrePage from "./pages/MovieByGenrePage";
-
+import TopRatedMoviesPage from "./pages/TopRatedMoviesPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,15 +29,22 @@ const queryClient = new QueryClient({
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark', 
+    mode: 'dark',
     primary: {
-      main: '#90caf9', 
+      main: '#90caf9',
     },
     secondary: {
-      main: '#f48fb1', 
-    }
+      main: '#f48fb1',
+    },
+  },
+  typography: {
+    button: {
+      fontSize: '1.25rem', 
+      fontWeight: 500,       
+    },
   },
 });
+
 
 
 const App = () => {
@@ -54,6 +61,7 @@ const App = () => {
             <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
             <Route path="/watchlist" element={<WatchlistPage />} />
             <Route path="/movies/genre/:genreId" element={<MoviesByGenrePage />} />
+            <Route path="/movies/top-rated" element={<TopRatedMoviesPage />} />
             <Route path="/movies/trending" element={<TrendingMoviesPage />} />
             <Route path= "/movies/upcoming" element={<UpcomingPage />} />
             <Route path="/" element={<HomePage />} />

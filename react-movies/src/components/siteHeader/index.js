@@ -22,12 +22,13 @@ const SiteHeader = ({ history }) => {
     { label: "Watchlist", path: "/watchlist"},
     { label: "Trending", path: "/movies/trending" },
     { label: "Upcoming", path: "/movies/upcoming" },
+    { label: "Top Rated", path: "/movies/top-rated" },
   ];
 
   const genreOptions = [
-    { label: "Action", path: "/movies/genre/28" }, // Example genre ID for Action
-    { label: "Comedy", path: "/movies/genre/35" }, // Example genre ID for Comedy
-    { label: "Drama", path: "/movies/genre/18" }, // Example genre ID for Drama
+    { label: "Action", path: "/movies/genre/28" }, 
+    { label: "Comedy", path: "/movies/genre/35" }, 
+    { label: "Drama", path: "/movies/genre/18" }, 
   ];
 
   const handleMenuSelect = (pageURL) => {
