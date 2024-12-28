@@ -23,6 +23,8 @@ const SiteHeader = ({ history }) => {
     { label: "Trending", path: "/movies/trending" },
     { label: "Upcoming", path: "/movies/upcoming" },
     { label: "Top Rated", path: "/movies/top-rated" },
+    { label: "Login", path: "/login" },
+    { label: "Signup", path: "/signup" },
   ];
 
   const genreOptions = [
