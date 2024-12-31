@@ -19,7 +19,6 @@ import TopRatedMoviesPage from "./pages/TopRatedMoviesPage";
 import SignUpPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -48,8 +47,6 @@ const darkTheme = createTheme({
   },
 });
 
-
-
 const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
@@ -69,8 +66,8 @@ const App = () => {
             <Route path= "/movies/upcoming" element={<UpcomingPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<HomePage />} />
-            <Route path="*" element={ <Navigate to="/" /> } />
+            <Route path="/" element={<Navigate to="/signup" replace />} />
+            <Route path="*" element={<Navigate to="/signup" replace />} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
@@ -80,5 +77,5 @@ const App = () => {
   );
 };
 
-const rootElement = createRoot( document.getElementById("root") )
+const rootElement = createRoot(document.getElementById("root"));
 rootElement.render(<App />);
